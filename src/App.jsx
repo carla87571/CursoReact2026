@@ -11,7 +11,9 @@ import { properties } from './data/properties.js';
 
 function App() {
 
+  const [city, setCity] = useState("");
   const [search, setSearch] = useState("");
+  
 
   const filteredProperties = properties.filter((property) => {
     const searchText = search.toLowerCase();
@@ -28,7 +30,18 @@ function App() {
 
       <main className="main-content">
         <Hero />
-        <SearchBar onSearch={setSearch} />
+
+        <SearchBar 
+        value={city}
+        searchedValue={search}
+        onChange={setCity}
+        onSearch={setSearch}
+        onClear={() => {
+          setCity("");
+          setSearch("");
+        }}
+        />
+        
         <PropertyList properties={filteredProperties} />
       </main>
 
