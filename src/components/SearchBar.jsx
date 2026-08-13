@@ -1,17 +1,20 @@
 import { useState } from "react";
 
-export function SearchBar() {
+export function SearchBar({ onSearch }) {
   const [city, setCity] = useState("");
   const [searchedCity, setSearchedCity] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
-    setSearchedCity(city.trim());
+    const nextSearch = city.trim();
+    setSearchedCity(nextSearch);
+    onSearch(nextSearch);
   }
 
   function handleClearSearch() {
     setCity("");
     setSearchedCity("");
+    onSearch("");
   }
 
   return (
