@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './index.css'
 import { Header } from './components/Header.jsx'
 import { Hero } from './components/Hero.jsx'
@@ -13,9 +13,16 @@ function App() {
 
   const [city, setCity] = useState("");
   const [search, setSearch] = useState("");
+  const [propertiesFromApi, setPropertiesFromApi] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPropertiesFromApi(properties);
+    }, 1000);
+  }, []);
   
 
-  const filteredProperties = properties.filter((property) => {
+  const filteredProperties = propertiesFromApi.filter((property) => {
     const searchText = search.toLowerCase();
     return (
       property.title.toLowerCase().includes(searchText) ||
@@ -43,7 +50,7 @@ function App() {
         />
         
         <PropertyList properties={filteredProperties} />
-        
+
       </main>
 
     </div>
