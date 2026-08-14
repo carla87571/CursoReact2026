@@ -43,6 +43,7 @@ function App() {
         />
         
         <PropertyList properties={filteredProperties} />
+        
       </main>
 
     </div>
