@@ -14,11 +14,22 @@ function App() {
   const [city, setCity] = useState("");
   const [search, setSearch] = useState("");
   const [propertiesFromApi, setPropertiesFromApi] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setPropertiesFromApi(properties);
-    }, 1000);
+    const timerId = setTimeout(() => {
+      //setPropertiesFromApi(properties);
+      try {
+        setPropertiesFromApi(properties);
+      } catch  {
+        setError("No pudimos cargar las propiedades. Por favor, inténtalo de nuevo más tarde. ");
+      } finally {
+        setIsLoading(false);
+      }
+
+    }, 4000);
+    return () => clearTimeout(timerId);
   }, []);
   
 
@@ -48,8 +59,15 @@ function App() {
           setSearch("");
         }}
         />
+        {isLoading && <p>Cargando propiedades...</p>}
         
-        <PropertyList properties={filteredProperties} />
+        {/* <PropertyList properties={filteredProperties} /> */}
+
+        { error && <p>{error}</p>}
+        {!isLoading && !error && (
+          <PropertyList properties={filteredProperties} />
+        )}
+       
 
       </main>
 
