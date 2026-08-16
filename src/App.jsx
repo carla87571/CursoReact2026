@@ -6,6 +6,7 @@ import { Hero } from './components/ui/Hero.jsx'
 import { PropertyList } from './components/properties/PropertyList.jsx'
 import { SearchBar } from './components/ui/SearchBar.jsx'
 import { properties } from './data/properties.js';
+import { filterProperties } from "./utils/filterProperties.js"
 
 
 
@@ -13,7 +14,7 @@ function App() {
 
   const [city, setCity] = useState("");
   const [search, setSearch] = useState("");
-  const [propertiesFromApi, setPropertiesFromApi] = useState([]);
+  const [propertyList, setPropertyList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,7 +22,7 @@ function App() {
     const timerId = setTimeout(() => {
       //setPropertiesFromApi(properties);
       try {
-        setPropertiesFromApi(properties);
+        setPropertyList(properties);
       } catch  {
         setError("No pudimos cargar las propiedades. Por favor, inténtalo de nuevo más tarde. ");
       } finally {
@@ -33,14 +34,7 @@ function App() {
   }, []);
   
 
-  const filteredProperties = propertiesFromApi.filter((property) => {
-    const searchText = search.toLowerCase();
-    return (
-      property.title.toLowerCase().includes(searchText) ||
-      property.location.toLowerCase().includes(searchText) ||
-      property.type.toLowerCase().includes(searchText)
-    );
-  });
+  const filteredProperties = filterProperties(propertyList, search);
   
   return (
     <div className="app">
