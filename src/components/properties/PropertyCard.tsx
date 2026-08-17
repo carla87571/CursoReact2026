@@ -1,4 +1,6 @@
-export function PropertyCard({ title, location, price, image, type }) {
+import { Property } from "../../types/propertyType";
+
+export function PropertyCard({ title, location, price, image, type } : Property) {
     return (
         
           <article className="property-card">

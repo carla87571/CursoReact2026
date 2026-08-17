@@ -1,11 +1,12 @@
 
 import { useState, useEffect } from 'react'
 import './index.css'
-import { Header } from './components/layout/Header.jsx'
-import { Hero } from './components/ui/Hero.jsx'
-import { PropertyList } from './components/properties/PropertyList.jsx'
-import { SearchBar } from './components/ui/SearchBar.jsx'
+import { Header } from './components/layout/Header.js'
+import { Hero } from './components/ui/Hero.js'
+import { PropertyList } from './components/properties/PropertyList.js'
+import { SearchBar } from './components/ui/SearchBar.js'
 import { properties } from './data/properties.js';
+import type { Property } from './types/propertyType.js';
 import { filterProperties } from "./utils/filterProperties.js"
 
 
@@ -14,9 +15,9 @@ function App() {
 
   const [city, setCity] = useState("");
   const [search, setSearch] = useState("");
-  const [propertyList, setPropertyList] = useState([]);
+  const [propertyList, setPropertyList] = useState<Property[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const timerId = setTimeout(() => {

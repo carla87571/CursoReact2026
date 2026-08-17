@@ -1,4 +1,6 @@
-export const properties = [
+import type { Property } from "../types/propertyType";
+
+export const properties: Property[] = [
   {
     id: 1,
     title: "Apartamento moderno",

@@ -1,4 +1,6 @@
-export function filterProperties(properties, searchText) {
+import type { Property } from "../types/propertyType";
+
+export function filterProperties(properties: Property[], searchText: string): Property[] {
     const normalizedSearch = searchText.trim().toLowerCase();
 
     if (!normalizedSearch) {
@@ -9,7 +11,7 @@ export function filterProperties(properties, searchText) {
         return (
             property.title.toLowerCase().includes(normalizedSearch) ||
             property.location.toLowerCase().includes(normalizedSearch) ||
-            property.type.toLowerCase().includes(normalizedSearch)
+            property.type?.toLowerCase().includes(normalizedSearch)
         );
     });
 }

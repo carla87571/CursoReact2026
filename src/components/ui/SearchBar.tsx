@@ -1,9 +1,17 @@
 
 
-export function SearchBar({ value, searchedValue, onChange, onSearch, onClear }) {
+interface SearchBarProps {
+  value: string;
+  searchedValue: string;
+  onChange: (value: string) => void;
+  onSearch: (value: string) => void;
+  onClear: () => void;
+}
+
+export function SearchBar({ value, searchedValue, onChange, onSearch, onClear }: SearchBarProps) {
   
   
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     onSearch(value.trim());
   }
