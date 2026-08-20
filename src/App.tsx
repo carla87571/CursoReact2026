@@ -30,7 +30,7 @@ function App() {
         setIsLoading(false);
       }
 
-    }, 4000);
+    }, 1000);
     return () => clearTimeout(timerId);
   }, []);
   
